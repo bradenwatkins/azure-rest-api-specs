@@ -1318,6 +1318,76 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/download": {
+      "post": {
+        "tags": [
+          "Invoices"
+        ],
+        "x-ms-examples": {
+          "InvoiceDownload": {
+            "$ref": "./examples/InvoiceDownload.json"
+          }
+        },
+        "operationId": "Invoices_DownloadMultipleInvoice",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Gets a URL to download an multiple invoices as a zip file. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "downloadUrls",
+            "in": "body",
+            "required": true,
+            "description": "An array of download urls for individual invoices",
+            "schema": {
+              "type": "array",
+              "example": [
+                "https://management.azure.com/providers/Microsft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000/invoices/E0000BID00/download?downloadToken=Drs_00000000000&useCache=True&api-version=2020-05-01",
+                "https://management.azure.com/providers/Microsft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000/invoices/E0000BID01/download?downloadToken=Drs_00000000000&useCache=True&api-version=2020-05-01",
+                "https://management.azure.com/providers/Microsft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000/invoices/E0000BID02/download?downloadToken=Drs_00000000000&useCache=True&api-version=2020-05-01"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions": {
       "get": {
         "tags": [
@@ -1493,6 +1563,76 @@
             "in": "query",
             "required": true,
             "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/invoices/download": {
+      "post": {
+        "tags": [
+          "Invoices"
+        ],
+        "x-ms-examples": {
+          "BillingSubscriptionInvoiceDownload": {
+            "$ref": "./examples/BillingSubscriptionInvoiceDownload.json"
+          }
+        },
+        "operationId": "Invoices_DownloadMultipleBillingSubscriptionInvoice",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Gets a URL to download multiple invoices as a zip file.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "downloadUrls",
+            "in": "body",
+            "required": true,
+            "description": "An array of download urls for individual invoices",
+            "schema": {
+              "type": "array",
+              "example": [
+                "https://management.azure.com/providers/Microsft.Billing/billingAccounts/default/billingSubscriptions/00000000-0000-0000-0000-000000000000/invoices/E0000BID00/download?downloadToken=Drs_00000000000&useCache=True&api-version=2020-05-01",
+                "https://management.azure.com/providers/Microsft.Billing/billingAccounts/default/billingSubscriptions/00000000-0000-0000-0000-000000000000/invoices/E0000BID01/download?downloadToken=Drs_00000000000&useCache=True&api-version=2020-05-01",
+                "https://management.azure.com/providers/Microsft.Billing/billingAccounts/default/billingSubscriptions/00000000-0000-0000-0000-000000000000/invoices/E0000BID02/download?downloadToken=Drs_00000000000&useCache=True&api-version=2020-05-01"
+              ]
+            }
           }
         ],
         "responses": {

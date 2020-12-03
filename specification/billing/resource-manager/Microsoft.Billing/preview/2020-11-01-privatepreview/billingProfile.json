@@ -207,7 +207,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BillingProfileDeleteEligibilityResult"
+              "$ref": "#/definitions/DeleteBillingProfileEligibilityResult"
             }
           },
           "default": {
@@ -393,7 +393,7 @@
         }
       }
     },
-    "BillingProfileDeleteEligibilityResult": {
+    "DeleteBillingProfileEligibilityResult": {
       "description": "Eligibility to delete a billing profile result.",
       "type": "object",
       "properties": {
@@ -419,7 +419,7 @@
         "NotAllowed"
       ],
       "x-ms-enum": {
-        "name": "deleteBillingProfileEligibilityStatus",
+        "name": "DeleteBillingProfileEligibilityStatus",
         "modelAsString": true
       }
     },
@@ -449,7 +449,7 @@
         "ReservedInstances"
       ],
       "x-ms-enum": {
-        "name": "deleteBillingProfileEligibilityCode",
+        "name": "DeleteBillingProfileEligibilityCode",
         "modelAsString": true
       }
     },

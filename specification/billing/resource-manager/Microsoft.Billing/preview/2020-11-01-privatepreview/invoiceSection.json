@@ -407,7 +407,7 @@
         "NotAllowed"
       ],
       "x-ms-enum": {
-        "name": "deleteInvoiceSectionEligibilityStatus",
+        "name": "DeleteInvoiceSectionEligibilityStatus",
         "modelAsString": true
       }
     },
@@ -436,7 +436,7 @@
         "ReservedInstances"
       ],
       "x-ms-enum": {
-        "name": "deleteInvoiceSectionEligibilityCode",
+        "name": "DeleteInvoiceSectionEligibilityCode",
         "modelAsString": true
       }
     },

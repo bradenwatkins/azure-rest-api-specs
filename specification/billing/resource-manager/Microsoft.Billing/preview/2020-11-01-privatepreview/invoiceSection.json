@@ -427,7 +427,7 @@
     },
     "DeleteInvoiceSectionEligibilityCode": {
       "type": "string",
-      "description": "Code for the delete invoice section eligibilty response.",
+      "description": "Code for the delete invoice section eligibility response.",
       "enum": [
         "AzureSubscriptions",
         "LastInvoiceSection",

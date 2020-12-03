@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "api-version": "2020-11-01",
+    "api-version": "2020-11-01-privatepreview",
     "billingAccountName": "{billingAccountName}",
-    "$expand": "invoiceSections"
+    "$expand": "invoiceSections, includeDeletedBillingProfiles, includeDeletedInvoiceSections"
   },
   "responses": {
     "200": {

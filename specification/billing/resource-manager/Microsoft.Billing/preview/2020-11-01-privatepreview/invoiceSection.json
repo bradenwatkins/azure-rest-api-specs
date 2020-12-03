@@ -253,7 +253,7 @@
             "$ref": "./examples/ValidateDeleteInvoiceSectionEligibilityFailure.json"
           }
         },
-        "operationId": "InvoiceSections_validatedeleteinvoicesectioneligibility",
+        "operationId": "InvoiceSections_ValidateDeleteEligibility",
         "description": "Validates if the invoice section can be deleted. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"

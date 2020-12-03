@@ -31,7 +31,7 @@ tag: package-2020-05
 ### Tag: package-2020-11-preview
 These settings apply only when `--tag=package-2020-11-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-11-preview'
+``` yaml $(tag) == 'package-preview-2020-11'
 input-file:
 - Microsoft.Billing/preview/2020-11-01-privatepreview/billingAccount.json
 - Microsoft.Billing/preview/2020-11-01-privatepreview/billingProfile.json

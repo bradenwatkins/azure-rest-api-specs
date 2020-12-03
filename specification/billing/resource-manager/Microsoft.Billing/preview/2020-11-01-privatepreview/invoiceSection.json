@@ -382,7 +382,7 @@
       }
     },
     "DeleteInvoiceSectionEligibilityResult": {
-      "description": "Elibility to delete an invoice section result.",
+      "description": "Eligibility to delete an invoice section result.",
       "type": "object",
       "properties": {
         "eligibilityStatus": {

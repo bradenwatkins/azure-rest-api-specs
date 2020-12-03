@@ -1,0 +1,2 @@
+validatedeletebillingprofileeligibility
+validatedeleteinvoicesectioneligibility

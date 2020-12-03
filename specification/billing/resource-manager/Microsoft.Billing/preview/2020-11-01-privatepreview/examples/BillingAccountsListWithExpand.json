@@ -548,7 +548,7 @@
                                 "costCategory": "Support"
                               },
                               "state": "Disabled",
-                              "reasonCode":"UnusalActivity",
+                              "reasonCode": "UnusalActivity",
                               "systemId": "9XXX-77XX-XX1-XXXX-XSS",
                               "targetCloud": "USSec"
                             }

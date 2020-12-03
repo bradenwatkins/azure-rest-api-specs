@@ -328,7 +328,7 @@
           "description": "Reason for the specified billing account status.",
           "type": "string",
           "enum": [
-            "UnusalActivity"
+            "UnusualActivity"
           ],
           "readOnly": true,
           "x-ms-enum": {
@@ -531,7 +531,9 @@
           "description": "The status of the billing profile.",
           "enum": [
             "Active",
+            "Deleted",
             "Disabled",
+            "UnderReview",
             "Warned"
           ],
           "type": "string",
@@ -546,7 +548,8 @@
           "enum": [
             "PastDue",
             "SpendingLimitReached",
-            "SpendingLimitExpired"
+            "SpendingLimitExpired",
+            "UnusualActivity"
           ],
           "type": "string",
           "readOnly": true,
@@ -648,11 +651,28 @@
           "type": "string",
           "enum": [
             "Active",
-            "Restricted"
+            "Deleted",
+            "Disabled",
+            "Restricted",
+            "UnderReview",
+            "Warned"
           ],
           "readOnly": true,
           "x-ms-enum": {
             "name": "InvoiceSectionState",
+            "modelAsString": true
+          }
+        },
+        "reasonCode": {
+          "description": "Reason for the specified invoice section status.",
+          "type": "string",
+          "enum": [
+            "PastDue",
+            "UnusualActivity"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InvoiceSectionStatusReasonCode",
             "modelAsString": true
           }
         },

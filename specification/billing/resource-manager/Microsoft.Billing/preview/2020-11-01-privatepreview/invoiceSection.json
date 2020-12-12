@@ -331,7 +331,7 @@
           "description": "The name of the invoice section.",
           "type": "string"
         },
-        "labels": {
+        "tags": {
           "type": "object",
           "description": "Dictionary of metadata associated with the invoice section.",
           "additionalProperties": {

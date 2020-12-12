@@ -53,7 +53,7 @@
               "endDate": "2018-01-01T17:32:28Z",
               "startDate": "2018-01-01T17:32:28Z",
               "type": "FreeAccount",
-              "spendingLimitStatus": "LimitReached"
+              "status": "LimitReached"
             }
           ],
           "invoiceSections": {

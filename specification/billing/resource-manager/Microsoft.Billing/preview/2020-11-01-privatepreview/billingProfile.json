@@ -172,6 +172,66 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "BillingProfiles"
+        ],
+        "operationId": "BillingProfiles_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "description": "Creates or updates a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.",
+        "x-ms-examples": {
+          "PutBillingProfile": {
+            "$ref": "./examples/PutBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            },
+            "description": "Request parameters that are provided to the create or update billing profile operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/validateDeleteBillingProfileEligibility": {
@@ -208,6 +268,48 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeleteBillingProfileEligibilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/validateDetachPaymentMethodEligibility": {
+      "get": {
+        "tags": [
+          "BillingProfiles"
+        ],
+        "x-ms-examples": {
+          "ValidateDetachPaymentMethodEligibilitySuccess": {
+            "$ref": "./examples/ValidateDetachPaymentMethodEligibilitySuccess.json"
+          },
+          "ValidateDetachPaymentMethodEligibilityFailure": {
+            "$ref": "./examples/ValidateDetachPaymentMethodEligibilityFailure.json"
+          }
+        },
+        "operationId": "BillingProfiles_GetEligibilityToDetachPaymentMethod",
+        "description": "Validates if the default payment method can be detached from the billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DetachPaymentMethodEligibilityResult"
             }
           },
           "default": {
@@ -383,6 +485,14 @@
             "$ref": "#/definitions/SpendingLimitDetails"
           }
         },
+        "tags": {
+          "type": "object",
+          "description": "Dictionary of metadata associated with the billing profile.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "maxItems": 1000
+        },
         "targetClouds": {
           "description": "Identifies the cloud environments that are associated with a billing profile. This is a system managed optional field and gets updated as the billing profile gets associated with accounts in various clouds.",
           "type": "array",
@@ -453,6 +563,54 @@
         "modelAsString": true
       }
     },
+    "DetachPaymentMethodEligibilityResult": {
+      "type": "object",
+      "description": "Result of the detach payment method eligibility validation.",
+      "properties": {
+        "isEligible": {
+          "description": "Specifies whether the payment method is eligible to be detached from the billing profile.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "description": "The list of detach payment method eligibility errors.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/DetachPaymentMethodErrorDetails"
+          }
+        }
+      }
+    },
+    "DetachPaymentMethodErrorDetails": {
+      "type": "object",
+      "description": "Error details of the detach payment method eligibility validation.",
+      "properties": {
+        "code": {
+          "description": "Error code for the detach payment method eligibility validation.",
+          "$ref": "#/definitions/DetachPaymentMethodEligibilityErrorCode"
+        },
+        "message": {
+          "description": "Error message for the detach payment method eligibility validation.",
+          "type": "string"
+        }
+      }
+    },
+    "DetachPaymentMethodEligibilityErrorCode": {
+      "type": "string",
+      "description": "Error code of the detach payment method eligibility validation response.",
+      "enum": [
+        "AzureSubscriptions",
+        "RecurringCharges",
+        "ReservedInstances",
+        "OutstandingCharges",
+        "PendingCharges"
+      ],
+      "x-ms-enum": {
+        "name": "detachPaymentMethodEligibilityErrorCode",
+        "modelAsString": true
+      }
+    },
     "SpendingLimitDetails": {
       "description": "The details of spending limit policy set on a billing profile.",
       "properties": {
@@ -480,7 +638,8 @@
           "description": "The type of spending limit.",
           "enum": [
             "FreeAccount",
-            "Sandbox"
+            "Sandbox",
+            "None"
           ],
           "type": "string",
           "readOnly": true,
@@ -489,13 +648,14 @@
             "modelAsString": true
           }
         },
-        "spendingLimitStatus": {
+        "status": {
           "description": "The status of current spending limit.",
           "enum": [
             "Active",
             "Expired",
             "Reached",
-            "Removed"
+            "Removed",
+            "None"
           ],
           "type": "string",
           "readOnly": true,
@@ -528,6 +688,10 @@
       ],
       "properties": {
         "firstName": {
+          "description": "First name.",
+          "type": "string"
+        },
+        "middleName": {
           "description": "First name.",
           "type": "string"
         },

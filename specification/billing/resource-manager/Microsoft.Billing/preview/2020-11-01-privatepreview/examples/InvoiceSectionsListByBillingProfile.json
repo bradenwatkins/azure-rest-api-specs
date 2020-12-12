@@ -15,7 +15,7 @@
             "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
             "properties": {
               "displayName": "invoiceSection1",
-              "labels": {
+              "tags": {
                 "pcCode": "A123456",
                 "costCategory": "Support"
               },
@@ -29,7 +29,7 @@
             "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
             "properties": {
               "displayName": "invoiceSection2",
-              "labels": {
+              "tags": {
                 "pcCode": "Z223456",
                 "costCategory": "Marketing"
               },
@@ -44,7 +44,7 @@
             "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
             "properties": {
               "displayName": "invoiceSection3",
-              "labels": {
+              "tags": {
                 "pcCode": "Z223419",
                 "costCategory": "Marketing"
               },
